@@ -11,7 +11,7 @@ app.use(express.json());
 
 app.post('/signup', async (req, res) => {
     try {
-        const { email, passkey, name, bloodtype, city, state, country, phononum } = req.body;
+        const { email, passkey, city, state, country, phononum } = req.body;
         const existingUser = await pool.query(
             'SELECT * FROM users WHERE email=$1',
             [email]
@@ -20,8 +20,8 @@ app.post('/signup', async (req, res) => {
             return res.json({ message: "User already exists" });
         }
         const newUser = await pool.query(
-            'INSERT INTO users (email, passkey,name,city,state,country,phononum) VALUES($1,$2,$3,$4,$5,$6,$7) RETURNING *',
-            [email, passkey, name, city, state, country, phononum]
+            'INSERT INTO users (email, passkey,city,state,country,phononum) VALUES($1,$2,$3,$4,$5,$6) RETURNING *',
+            [email, passkey, city, state, country, phononum]
         );
 
         res.json(newUser.rows[0]);
@@ -56,7 +56,7 @@ app.post('/login', async (req, res) => {
 app.post('/submitDonorLocation', async (req, res) => {
     const { bloodtype, latitude, longitude } = req.body;
     try {
-        const newLoc = await pool.query('INSERT INTO users (bloodtype,LAT,LON) VALUES($1,$2,$3) RETURNING *', [bloodtype, latitude, longitude]);
+        const newLoc = await pool.query('UPDATE users SET bloodtype = $1, latitude = $2, longitude = $3 WHERE user_id = (SELECT user_id FROM users ORDER BY user_id DESC LIMIT 1) RETURNING *', [bloodtype, latitude, longitude]);
         res.status(200).json(newLoc.rows[0]);
     }
     catch (err) {
@@ -67,14 +67,14 @@ app.post('/submitDonorLocation', async (req, res) => {
 app.post('/searchDonor', async (req, res) => {
     const { bloodtype, latitude, longitude } = req.body;
     try {
-        const allLat = await pool.query('SELECT LAT, LON FROM users WHERE bloodtype=$1', [bloodtype]);
+        const allLat = await pool.query('SELECT latitude, longitude FROM users WHERE bloodtype=$1', [bloodtype]);
         if (allLat.rows.length == 0) {
             res.json({ message: "No donors found" });
         }
 
         const donorLocations = allLat.rows.map(donor => ({
-            latitude: parseFloat(donor.lat),
-            longitude: parseFloat(donor.lon)
+            latitude: parseFloat(donor.latitude),
+            longitude: parseFloat(donor.longitude)
         }));
 
         const nearest = geoLib.findNearest({ latitude: parseFloat(latitude), longitude: parseFloat(longitude) }, donorLocations);

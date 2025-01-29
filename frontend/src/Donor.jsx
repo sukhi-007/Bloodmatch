@@ -4,27 +4,15 @@ import "./Donor.css";
 
 function Donor() {
   const [userType, setUserType] = useState(""); // Donor or Recipient
-  const [bloodType, setBloodType] = useState(""); // Blood type dropdown selection
-  const [userData, setUserData] = useState({});
+  const [bloodtype, setBloodType] = useState(""); // Blood type dropdown selection
   const navigate = useNavigate();
 
   const handleSave = () => {
-    if (!userType || !bloodType) {
+    if (!userType || !bloodtype) {
       alert("Please select a user type and blood type.");
       return;
     }
-
-    const userInfo = {
-      type: userType,
-      bloodType,
-      name: "User's Name", // Placeholder
-      contact: "User's Contact", // Placeholder
-    };
-
-    setUserData(userInfo);
-    console.log("User Information:", JSON.stringify(userInfo));
-
-    navigate("/location"); // Redirect to location page
+    navigate(`/location?userType=${userType}&bloodType=${bloodtype}`);// Redirect to location page
   };
 
   return (
@@ -54,7 +42,7 @@ function Donor() {
       <div className="form-group">
         <label>Select Blood Type</label>
         <select
-          value={bloodType}
+          value={bloodtype}
           onChange={(e) => setBloodType(e.target.value)}
           required
         >
@@ -75,7 +63,7 @@ function Donor() {
         You are a: <strong>{userType || "Select a type"}</strong>
       </p>
       <p>
-        Your Blood Type: <strong>{bloodType || "Not Selected"}</strong>
+        Your Blood Type: <strong>{bloodtype || "Not Selected"}</strong>
       </p>
 
       {/* Save Button */}

@@ -4,7 +4,7 @@ function SignupForm({ name, setName, country, setCountry, state, setState, city,
   return (
     <div>
       <div className="form-group">
-        <label>Username</label>
+        <label>Email</label>
         <input
           type="text"
           placeholder="Enter username"

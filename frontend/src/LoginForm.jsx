@@ -3,7 +3,7 @@ import React from 'react';
 function LoginForm({ name, setName, password, setPassword }) {
   return (
     <div className="form-group">
-      <label>Username</label>
+      <label>Email</label>
       <input
         type="text"
         placeholder="Enter username"
