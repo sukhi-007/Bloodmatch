@@ -1,0 +1,153 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: "Arial", sans-serif;
+  background: linear-gradient(to bottom, #000000, #1a1a1a); 
+  background-color:#000;
+  background-size: cover;
+  background-repeat: repeat;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  padding: 20px;
+}
+
+.form-container {
+  background: rgba(0, 0, 0, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.2); 
+  border-radius: 15px;
+  box-shadow: 0 8px 30px rgba(255, 255, 255, 0.2); 
+  padding: 30px;
+  width: 100%;
+  height:100%;
+  max-width: 600px;
+  text-align: center;
+  position: relative;
+}
+
+h1 {
+  font-size: 26px;
+  margin-bottom: 20px;
+  color: #ffffff; 
+}
+
+.form-group {
+  margin-bottom: 15px;
+  text-align: left;
+}
+
+label {
+  font-size: 14px;
+  color: #d1d1d1; 
+  display: block;
+  margin-bottom: 5px;
+  text-align: left;
+}
+
+input,
+select {
+  width: 100%;
+  padding: 12px;
+  font-size: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.2); 
+  border-radius: 8px;
+  outline: none;
+  background-color: rgba(255, 255, 255, 0.1); 
+  color: black;
+}
+
+input::placeholder {
+  color: #d1d1d1;
+}
+
+select {
+  background-color: rgba(255, 255, 255, 0.9); 
+  color: black; 
+}
+
+select option {
+  color: black;
+}
+
+input:focus,
+select:focus {
+  border-color: #ffffff;
+  background-color: rgba(255, 255, 255, 0.2); 
+}
+
+.btn {
+  background-color: #ffffff; 
+  color: #000; 
+  padding: 12px 15px;
+  font-size: 16px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  width: 100%;
+  margin-top: 10px;
+  transition: all 0.3s ease;
+}
+
+.btn:hover {
+  background-color:black; 
+}
+.toggle-btn {
+  background: none;
+  color:white; 
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  text-decoration: underline;
+  padding: 0;
+  outline: none;
+}
+
+.toggle-btn:hover {
+  color:black;
+}
+
+@media screen and (max-width: 768px) {
+  .form-container {
+    padding: 20px;
+    width: 90%;
+  }
+
+  h1 {
+    font-size: 22px;
+  }
+
+  input,
+  select {
+    padding: 10px;
+  }
+
+  .btn {
+    font-size: 14px;
+    padding: 10px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  h1 {
+    font-size: 20px;
+  }
+
+  .btn {
+    font-size: 13px;
+    padding: 8px;
+  }
+  
+}
