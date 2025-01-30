@@ -1,31 +1,65 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Donor.css";
 
 function Donor() {
   const [userType, setUserType] = useState(""); // Donor or Recipient
   const [bloodtype, setBloodType] = useState(""); // Blood type dropdown selection
+  const [location, setLocation] = useState(null); // Location state
+  const [error, setError] = useState(""); // Error state
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if ("geolocation" in navigator) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          setLocation({
+            latitude: position.coords.latitude,
+            longitude: position.coords.longitude,
+          });
+        },
+        (err) => {
+          setError("Location access denied. Please enable location services.");
+          console.error(err);
+        },
+        {
+          enableHighAccuracy: true,
+          timeout: 10000,
+          maximumAge: 0,
+        }
+      );
+    } else {
+      setError("Geolocation is not supported by your browser.");
+    }
+  }, []);
 
   const handleSave = () => {
     if (!userType || !bloodtype) {
       alert("Please select a user type and blood type.");
       return;
     }
+
+    if (!location) {
+      alert("Location is not available. Please enable location services.");
+      return;
+    }
+
     if (userType === "donor") {
-      navigate('/donor-form', {
+      navigate("/donor-form", {
         state: {
-          userType: userType,
-          bloodtype: bloodtype
+          bloodtype,
+          location
         }
-      })
+      });
     } else {
-      navigate('/location', {
+      navigate("/location", {
         state: {
           userType: userType,
-          bloodtype: bloodtype
-        }
-      })
+          bloodtype: bloodtype,
+          latitude: location.latitude,
+          longitude: location.longitude,
+        },
+      });
     }
   };
 
@@ -79,7 +113,6 @@ function Donor() {
       <p>
         Your Blood Type: <strong>{bloodtype || "Not Selected"}</strong>
       </p>
-
       {/* Save Button */}
       <button className="save-button" onClick={handleSave}>
         Save Information
@@ -89,3 +122,4 @@ function Donor() {
 }
 
 export default Donor;
+

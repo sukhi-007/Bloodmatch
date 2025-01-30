@@ -134,10 +134,10 @@ function LocationPage() {
           <p>Location Address:</p>
           {address ? (
             <div>
-              <p>City:     {address.city}</p>
-              <p>State:    {address.state}</p>
-              <p>Country:  {address.country}</p>
-              <p>Postcode: {address.postcode}</p>
+              <p>City: {address.city}</p>
+              <p>State: {address.state}</p>
+              <p>Country: {address.country}</p>
+              <p>Postcode:{address.postcode}</p>
             </div>
           ) : (
             <p>Loading address...</p>
