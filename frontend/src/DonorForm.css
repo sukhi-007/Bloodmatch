@@ -1,0 +1,72 @@
+/* Styling for the Donor Verification Form */
+.DonorForm {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 4px 4px 12px rgba(2, 2, 2, 0.1);
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.formgroup {
+    margin-bottom: 15px;
+    font-size: 16px;
+}
+
+.formgroup label {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    color: #555;
+}
+
+input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+/* Align paragraphs and form elements uniformly */
+p,
+.formgroup {
+    margin-left: 0;
+    /* Ensure consistent starting point */
+    padding-left: 0;
+    text-align: left;
+    /* Remove any extra padding */
+}
+
+/* Styling for the Submit Button */
+.submit-button {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    background-color: #b22222;
+    /* Dark Red */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 20px;
+    transition: background-color 0.3s ease;
+}
+
+.submit-button:hover {
+    background-color: #8b0000;
+    /* Darker Red */
+}
+
+.submit-button:focus {
+    outline: none;
+}
+
+.submit-button:active {
+    background-color: #7a0000;
+    /* Even darker red */
+}

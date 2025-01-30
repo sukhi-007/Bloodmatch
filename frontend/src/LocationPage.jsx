@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom"; // Import useLocation for URL params
+import axios from "axios"; // Import axios for making API calls
 import "./LocationPage.css";
-
 
 function LocationPage() {
   const [location, setLocation] = useState(null);
+  const [address, setAddress] = useState(""); // State for storing the address
   const [permissionStatus, setPermissionStatus] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate(); // For navigation
@@ -29,6 +30,9 @@ function LocationPage() {
         setLocation({ latitude, longitude });
         setPermissionStatus("granted");
 
+        // Get the address from the coordinates using Nominatim API
+        getAddressFromCoords(latitude, longitude);
+
         // Invoke respective API based on userType
         if (userType === "donor") {
           submitDonorLocation(latitude, longitude);
@@ -46,6 +50,23 @@ function LocationPage() {
         maximumAge: 0,
       }
     );
+  };
+
+  // Get the address using Nominatim API
+  const getAddressFromCoords = async (lat, lng) => {
+    const url = `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lng}&format=json`;
+
+    try {
+      const response = await axios.get(url);
+      if (response.data && response.data.address) {
+        setAddress(response.data.address);
+      } else {
+        setAddress("Unable to retrieve address.");
+      }
+    } catch (error) {
+      console.error("Error fetching address:", error);
+      setAddress("Error fetching address.");
+    }
   };
 
   // API call for Donor
@@ -105,17 +126,22 @@ function LocationPage() {
   const handlePreviousPage = () => {
     navigate("/Donor");
   };
-
   return (
     <div className="location-page">
-      <h1>Location Permission</h1>
-
+      <h1>Location Permission Granted</h1>
       {permissionStatus === "granted" && location && (
         <div>
-          <p>Your location is:</p>
-          <p>Latitude: {location.latitude}</p>
-          <p>Longitude: {location.longitude}</p>
-          <p>Location as JSON: {JSON.stringify(location)}</p>
+          <p>Location Address:</p>
+          {address ? (
+            <div>
+              <p>City:     {address.city}</p>
+              <p>State:    {address.state}</p>
+              <p>Country:  {address.country}</p>
+              <p>Postcode: {address.postcode}</p>
+            </div>
+          ) : (
+            <p>Loading address...</p>
+          )}
           <div>
             <button onClick={handlePreviousPage}>Previous Page</button>
             <button onClick={handleNextPage}>Next Page</button>

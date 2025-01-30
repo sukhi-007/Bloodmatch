@@ -1,0 +1,12 @@
+/* Next.css */
+.map-container {
+    width: 100vw;
+    /* Full width of viewport */
+    height: 100vh;
+    /* Full height of viewport */
+}
+
+.leaflet-container {
+    width: 100% !important;
+    height: 100% !important;
+}

@@ -1,78 +1,101 @@
 .location-page {
-    width: 100%;
-    max-width: 600px;
-    margin: 50px auto;
-    padding: 20px;
-    background: rgba(0, 0, 0, 0.85); 
-    border: 1px solid rgba(255, 255, 255, 0.2); 
-    border-radius: 15px;
-    box-shadow: 0 8px 30px rgba(255, 255, 255, 0.2);
-  }
-  
-  .location-page h1 {
-    text-align: center;
-    color: white;
-    font-size: 26px;
-    margin-bottom: 20px;
-  }
-  
-  .location-page p {
-    font-size: 16px;
-    color: white;
-    text-align: center;
-    margin-top: 20px;
-  }
-  
-  button {
-    display: block;
-    margin: 15px auto;
-    background-color: #4CAF50;
-    color: black;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.2s ease, transform 0.2s ease;
-  }
-  
-  button:hover {
-    background-color: #45a049;
-    transform: scale(1.05);
-  }
-  
-  .location-page .error {
-    color: red;
-    text-align: center;
-    font-size: 16px;
-    margin-top: 20px;
-  }
+  width: 100%;
+  max-width: 600px;
+  margin: 50px auto;
+  padding: 20px;
 
-  .location-page .location-details {
-    text-align: center;
-    margin-top: 30px;
-  }
-  
-  .location-page .location-details p {
-    font-size: 18px;
-    color: white;
-    margin-bottom: 10px;
-  }
-  
-  .location-page .navigation-buttons {
-    display: flex;
-    justify-content: space-around;
-    margin-top: 20px;
-  }
-  
-  .location-page .navigation-buttons button {
-    width: 100px;
-    height: 40px;
-    background-color: #4CAF50;
-    font-size: 14px;
-  }
-  
-  .location-page .navigation-buttons button:hover {
-    background-color: #45a049;
-  }
-  
+  background: rgba(255, 255, 255, 0.85);
+  /* Changed to match previous styling */
+  border: 1px solid rgba(255, 0, 0, 0.5);
+  /* Changed to match previous styling */
+  border-radius: 15px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+  /* Adjusted shadow for consistency */
+}
+
+
+.location-page h1 {
+  text-align: center;
+  color: #000000;
+  /* Changed to match previous styling */
+  font-size: 26px;
+  margin-bottom: 20px;
+}
+
+.location-page p {
+  font-size: 16px;
+  color: black;
+  /* Changed to match previous styling */
+  text-align: left;
+  /* Align text to the left */
+  line-height: 1.4;
+  /* Decrease line spacing */
+  padding-left: 20px;
+  /* Add a little space from the left */
+  margin-bottom: 5px;
+  margin-top: 5px;
+}
+
+button {
+  display: block;
+  margin: 15px auto;
+  background-color: #ff0000;
+  /* Changed to match previous styling */
+  color: #ffffff;
+  /* Changed to match previous styling */
+  padding: 12px 20px;
+  /* Adjusted padding for consistency */
+  border: none;
+  border-radius: 10px;
+  /* Adjusted for consistency */
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  /* Added transition for hover effect */
+}
+
+button:hover {
+  background-color: #cc0000;
+  /* Changed to match previous styling */
+  transform: scale(1.05);
+}
+
+.location-page .error {
+  color: red;
+  text-align: center;
+  font-size: 16px;
+  margin-top: 20px;
+}
+
+.location-page .location-details {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.location-page .location-details p {
+  font-size: 18px;
+  color: #ffffff;
+  /* Changed to match previous styling */
+  margin-bottom: 10px;
+}
+
+.location-page .navigation-buttons {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+}
+
+.location-page .navigation-buttons button {
+  width: 100px;
+  height: 40px;
+  background-color: #ff0000;
+  /* Changed to match previous styling */
+  color: #ffffff;
+  /* Changed to match previous styling */
+  font-size: 14px;
+}
+
+.location-page .navigation-buttons button:hover {
+  background-color: #cc0000;
+  /* Changed to match previous styling */
+}

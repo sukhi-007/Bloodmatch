@@ -54,6 +54,7 @@ app.post('/login', async (req, res) => {
 });
 
 app.post('/submitDonorLocation', async (req, res) => {
+    console.log(req.body);
     const { bloodtype, latitude, longitude } = req.body;
     try {
         const newLoc = await pool.query('UPDATE users SET bloodtype = $1, latitude = $2, longitude = $3 WHERE user_id = (SELECT user_id FROM users ORDER BY user_id DESC LIMIT 1) RETURNING *', [bloodtype, latitude, longitude]);

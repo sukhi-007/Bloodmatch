@@ -6,6 +6,7 @@ import Donor from './Donor';
 import LocationPage from './LocationPage';
 import Next from './Next';
 import "./App.css";
+import DonorForm from './DonorForm';
 
 function LoginSignupPage() {
   const [formType, setFormType] = useState("login");
@@ -97,6 +98,7 @@ function App() {
         <Route path="/Donor" element={<Donor />} />
         <Route path="/location" element={<LocationPage />} />
         <Route path="/next" element={<Next />} />
+        <Route path="/donor-form" element={<DonorForm />} />
       </Routes>
     </Router>
   );

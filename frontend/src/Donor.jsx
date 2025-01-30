@@ -12,7 +12,21 @@ function Donor() {
       alert("Please select a user type and blood type.");
       return;
     }
-    navigate(`/location?userType=${userType}&bloodType=${bloodtype}`);// Redirect to location page
+    if (userType === "donor") {
+      navigate('/donor-form', {
+        state: {
+          userType: userType,
+          bloodtype: bloodtype
+        }
+      })
+    } else {
+      navigate('/location', {
+        state: {
+          userType: userType,
+          bloodtype: bloodtype
+        }
+      })
+    }
   };
 
   return (
