@@ -7,7 +7,7 @@ function SignupForm({ name, setName, country, setCountry, state, setState, city,
         <label>Email</label>
         <input
           type="text"
-          placeholder="Enter username"
+          placeholder="Enter email"
           value={name}
           onChange={(e) => setName(e.target.value)}
           required

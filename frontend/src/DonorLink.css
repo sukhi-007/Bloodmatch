@@ -1,0 +1,48 @@
+/* ImageStack.css */
+html,
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow-y: auto;
+}
+
+.image-container {
+    position: relative;
+    /* Set the parent container to relative */
+}
+
+.login-button {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+}
+
+.login-button:hover {
+    background-color: darkred;
+}
+
+.image-stack {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    /* Full height of the viewport */
+}
+
+.image {
+    flex: 1;
+    /* Each image takes equal space */
+    width: 100%;
+    /* Full width */
+    object-fit: cover;
+    /* Cover the area without distortion */
+}

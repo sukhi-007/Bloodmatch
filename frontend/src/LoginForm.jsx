@@ -6,7 +6,7 @@ function LoginForm({ name, setName, password, setPassword }) {
       <label>Email</label>
       <input
         type="text"
-        placeholder="Enter username"
+        placeholder="Enter email"
         value={name}
         onChange={(e) => setName(e.target.value)}
         required

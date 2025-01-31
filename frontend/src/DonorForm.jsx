@@ -11,6 +11,7 @@ function DonorForm() {
 
     // Extract state data from the navigation state
     const { bloodtype, location: userLocation } = location.state || {};
+    const navigate = useNavigate();
 
     const handleSubmit = async () => {
         if (!ageGroup || !alcoholConsumption || !noIllness) {
@@ -33,6 +34,7 @@ function DonorForm() {
             const response = await axios.post("http://localhost:3000/submitDonorLocation", donorData);
             if (response.status === 200) {
                 alert("Thank you for registering as a donor!");
+                navigate("/");
             }
         } catch (error) {
             console.error("Error submitting donor data:", error);
