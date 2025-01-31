@@ -77,8 +77,6 @@ The Blood Matching App is a real-time platform that connects blood donors with r
    npm run dev
    ```
 
-iOS
-   ```
 
 ## Future Enhancements
 - **AI-Based Blood Demand Prediction**: Uses machine learning to predict areas with higher blood demand.
