@@ -77,19 +77,7 @@ The Blood Matching App is a real-time platform that connects blood donors with r
    npm run dev
    ```
 
-### **Mobile App Setup**
-1. Navigate to the React Native app directory:
-   ```sh
-   cd mobile
-   ```
-2. Install dependencies:
-   ```sh
-   npm install
-   ```
-3. Run the app on an emulator or physical device:
-   ```sh
-   npx react-native run-android  # For Android
-   npx react-native run-ios      # For iOS
+iOS
    ```
 
 ## Future Enhancements
