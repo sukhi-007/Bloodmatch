@@ -8,6 +8,7 @@ function LocationPage() {
   const [address, setAddress] = useState(""); // State for storing the address
   const [permissionStatus, setPermissionStatus] = useState("");
   const [error, setError] = useState("");
+  const [donorsData, setDonorsData] = useState([]);
   const navigate = useNavigate(); // For navigation
   const query = new URLSearchParams(useLocation().search);
 
@@ -86,6 +87,7 @@ function LocationPage() {
           throw new Error("Failed to submit donor location");
         }
         const data = await response.json();
+        setDonorsData(data);
         console.log("Donor submitted:", data);
       } else {
         setError("Location data is missing.");
@@ -120,9 +122,13 @@ function LocationPage() {
   };
 
   const handleNextPage = () => {
-    navigate("/next");
+    if (donorsData) {
+      // Send donorsData to the next page
+      navigate("/next", { state: { donorsData } });
+    } else {
+      setError("No donor data available. Try again later.");
+    }
   };
-
   const handlePreviousPage = () => {
     navigate("/Donor");
   };

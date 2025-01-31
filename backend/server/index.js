@@ -48,7 +48,7 @@ app.post('/login', async (req, res) => {
             res.json({ message: "Incorrect password" });
         }
     }
-    catch {
+    catch (err) {
         console.error(err.message);
     }
 });
@@ -66,6 +66,7 @@ app.post('/submitDonorLocation', async (req, res) => {
 });
 
 app.post('/searchDonor', async (req, res) => {
+    console.log(req.body);
     const { bloodtype, latitude, longitude } = req.body;
     try {
         const allLat = await pool.query('SELECT latitude, longitude FROM users WHERE bloodtype=$1', [bloodtype]);
@@ -79,6 +80,7 @@ app.post('/searchDonor', async (req, res) => {
         }));
 
         const nearest = geoLib.findNearest({ latitude: parseFloat(latitude), longitude: parseFloat(longitude) }, donorLocations);
+        console.log(nearest);
         res.json(nearest);
     }
     catch (err) {
