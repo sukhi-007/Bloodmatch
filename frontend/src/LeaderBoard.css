@@ -1,0 +1,88 @@
+/* Leaderboard Container */
+.leaderboard-container {
+    max-width: 500px;
+    margin: auto;
+    padding: 20px;
+    background: #ffffff;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    text-align: center;
+}
+
+/* Title */
+h2 {
+    font-size: 24px;
+    color: #d62828;
+    margin-bottom: 15px;
+}
+
+/* Leaderboard List */
+.leaderboard {
+    list-style: none;
+    padding: 0;
+}
+
+/* Leaderboard Items */
+.leaderboard-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 8px;
+    background: #f43545;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+/* Rank Number */
+.rank {
+    color: #0b0b0b;
+    font-size: 18px;
+    font-weight: bold;
+    width: 40px;
+}
+
+/* Donor Name */
+.donor-name {
+    flex-grow: 1;
+    text-align: left;
+    color: #0f0f0f;
+}
+
+/* Blood Donated Amount */
+.blood-donated {
+    color: #0a0a0a;
+    font-weight: bold;
+}
+
+/* Top Donor (First Place) */
+.leaderboard-item:nth-child(1) {
+    background: #e7e3d9;
+    color: #090909;
+    font-size: 20px;
+    font-weight: bold;
+    box-shadow: 0px 0px 15px rgba(32, 32, 32, 0.8);
+    border-radius: 8px;
+}
+
+/* Top 9 Donors (Ranks 2-10) */
+.leaderboard-item:nth-child(-n+10) {
+    background: #dddbdb;
+    border-radius: 6px;
+}
+
+/* General Leaderboard Item Styling */
+.leaderboard-item {
+    padding: 10px;
+    margin: 8px 0;
+    transition: background 0.3s ease-in-out, transform 0.2s ease-in-out;
+    border-radius: 5px;
+}
+
+/* Hover Effect */
+.leaderboard-item:hover {
+    background: #cfcfcf;
+    transform: scale(1.03);
+    cursor: pointer;
+}

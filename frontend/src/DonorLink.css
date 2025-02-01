@@ -46,3 +46,38 @@ body {
     object-fit: cover;
     /* Cover the area without distortion */
 }
+
+
+/* Login/Signup Button */
+.login-button {
+    background-color: #ff5252;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+.login-button:hover {
+    background-color: #d32f2f;
+}
+
+/* Leaderboard Button */
+.leaderboard-button {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.leaderboard-button:hover {
+    background-color: darkred;
+}

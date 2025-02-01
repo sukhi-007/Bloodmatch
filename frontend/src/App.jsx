@@ -8,6 +8,7 @@ import Next from './Next';
 import "./App.css";
 import DonorForm from './DonorForm';
 import DonorLink from './DonorLink';
+import Leaderboard from "./Leaderboard";
 
 function LoginSignupPage() {
   const [formType, setFormType] = useState("login");
@@ -101,6 +102,7 @@ function App() {
         <Route path="/location" element={<LocationPage />} />
         <Route path="/next" element={<Next />} />
         <Route path="/donor-form" element={<DonorForm />} />
+        <Route path="/Leaderboard" element={<Leaderboard />} />
       </Routes>
     </Router>
   );

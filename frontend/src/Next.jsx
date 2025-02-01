@@ -26,24 +26,27 @@ const Next = () => {
 
   const { state } = useLocation();
 
-  // Fallback donor location (New York)
-  const fallbackDonor = { latitude: 13.0070, longitude: 77.5667 };
+  // Fallback donor locations (more than 3)
+  const fallbackDonors = [
+    { latitude: 13.0070, longitude: 77.5667, name: "Fallback Donor 1" },
+    { latitude: 13.0600, longitude: 77.5790, name: "Fallback Donor 2" },
+    { latitude: 13.120, longitude: 77.5000, name: "Fallback Donor 3" },
+    { latitude: 13.0100, longitude: 77.7600, name: "Fallback Donor 4" },
+    { latitude: 13.0300, longitude: 77.5100, name: "Fallback Donor 5" }
+  ];
 
   // Retrieve donor data from previous page, or use fallback
-  const donorsData = state?.donorsData || [fallbackDonor];
-  console.log("Parsed donorsData:", donorsData);
+  const donorsData = state?.donorsData?.length ? state.donorsData : fallbackDonors;
 
   useEffect(() => {
     if ("geolocation" in navigator) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
           const { latitude, longitude } = position.coords;
-          console.log("User Geolocation Coordinates:", latitude, longitude);
           setLocation({ latitude, longitude });
           setIsLoading(false);
         },
         (err) => {
-          console.error("Geolocation error:", err);
           setError("Unable to retrieve location.");
           setIsLoading(false);
         },
@@ -70,13 +73,30 @@ const Next = () => {
   const userLatitude = parseFloat(location?.latitude);
   const userLongitude = parseFloat(location?.longitude);
 
-  // Extract donor location
-  const donorLocation = donorsData[0] || fallbackDonor;
-  const donorLatitude = parseFloat(donorLocation.latitude) || fallbackDonor.latitude;
-  const donorLongitude = parseFloat(donorLocation.longitude) || fallbackDonor.longitude;
+  // Function to calculate distance between two points using Haversine formula
+  const getDistance = (lat1, lon1, lat2, lon2) => {
+    const R = 6371; // Radius of the Earth in km
+    const dLat = ((lat2 - lat1) * Math.PI) / 180;
+    const dLon = ((lon2 - lon1) * Math.PI) / 180;
+    const a =
+      Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+      Math.cos((lat1 * Math.PI) / 180) *
+      Math.cos((lat2 * Math.PI) / 180) *
+      Math.sin(dLon / 2) *
+      Math.sin(dLon / 2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    return R * c; // Distance in km
+  };
 
-  console.log("User Location: ", userLatitude, userLongitude);
-  console.log("Donor Location: ", donorLatitude, donorLongitude);
+  // Sort donors by distance from the user and select the nearest 3
+  const sortedDonors = donorsData
+    .map((donor) => ({
+      ...donor,
+      distance: getDistance(userLatitude, userLongitude, donor.latitude, donor.longitude),
+    }))
+    .sort((a, b) => a.distance - b.distance);
+
+  const nearestDonors = sortedDonors.slice(0, 1); // 
 
   return (
     <div className="map-container">
@@ -94,20 +114,25 @@ const Next = () => {
           <Popup>You are here!</Popup>
         </Marker>
 
-        {/* Donor's Location Marker */}
-        <Marker position={[donorLatitude, donorLongitude]}>
-          <Popup>Donor's location</Popup>
-        </Marker>
+        {/* Donor Markers */}
+        {donorsData.map((donor, index) => (
+          <Marker key={index} position={[donor.latitude, donor.longitude]}>
+            <Popup>{donor.name || `Donor ${index + 1}`}</Popup>
+          </Marker>
+        ))}
 
-        {/* Draw Line between User and Donor */}
-        <Polyline
-          positions={[
-            [userLatitude, userLongitude],
-            [donorLatitude, donorLongitude],
-          ]}
-          color="blue"
-          weight={4}
-        />
+        {/* Draw Lines Only to Nearest 3 Donors */}
+        {nearestDonors.map((donor, index) => (
+          <Polyline
+            key={index}
+            positions={[
+              [userLatitude, userLongitude],
+              [donor.latitude, donor.longitude],
+            ]}
+            color="blue"
+            weight={3}
+          />
+        ))}
       </MapContainer>
     </div>
   );
