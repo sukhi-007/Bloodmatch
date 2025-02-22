@@ -9,6 +9,8 @@ const port = 3000;
 app.use(cors());
 app.use(express.json());
 
+
+
 app.post('/signup', async (req, res) => {
     try {
         const { email, passkey, city, state, country, phononum } = req.body;
